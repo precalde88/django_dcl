@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% block title %}Resultados DISC{% endblock %}
+{% block body %} 
+
+<div class="container">
+    <h1 class="text-center display-1">Test DCL</h1>
+    <table
+          id="table"
+          data-pagination="true"
+          data-search="true"
+          data-toggle="table"
+          data-show-columns="true"
+          data-locale="es-PY"
+          data-show-columns-toggle-all="true"
+    >
+        <thead>
+            <th>Acciones</th>
+            {% for col in columns %}
+            <th data-sortable="true">{{col}}</th>
+
+            {% endfor %}
+
+        </thead>
+        
+        <tbody>
+            {% for key in dict_total %}
+            <tr>
+                {% for row, val in key.items %}
+                    {% if row == "Id" %}
+                    <td>
+                        <a href="{% url "base:informe_disc" val %}" class="btn btn-warning btn-circle" role="button" ><i class="far fa-edit">Informe</i></a>
+                    </td>
+                    {% endif %}
+                <td>{{val}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+</div>
+
+{% endblock %}

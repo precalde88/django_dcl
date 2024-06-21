@@ -1,0 +1,127 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %} Grafico Disc {% endblock %}
+
+{% block css_page %}
+    {% comment %} <script src="{% static 'base/highcharts-8.1.2/highcharts.js' %}"></script>
+    <script src="{% static 'base/highcharts-8.1.2/modules/exporting.js' %}"></script>
+    <script src="{% static 'base/highcharts-8.1.2/modules/export-data.js' %}"></script>
+    <script src="{% static 'base/highcharts-8.1.2/modules/accessibility.js' %}"></script> {% endcomment %}
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <style type='text/css'>
+        body{
+            font-family: 'Roboto', sans-serif;
+        }
+        .nuevo-estilo {
+            margin: 15px 0px;
+            background-color: #EFEDF1;
+            border: 1px solid #E2E3E8;
+            padding: 10px 1px;
+        }
+        .estilotabla {
+            border-color: black;
+            border-width: 2px;
+            border-style: solid;
+            font-weight: bold;
+        }
+        .estilotabla2 {
+            border-color: black;
+            border-width: 1px;
+            border-style: solid;
+        }
+    </style>
+{% endblock %}
+{% block navigation %}{% endblock %}
+{% block header %}{% endblock %}
+{% block body %}
+<div class="container">
+    <h3 class="text-center">Datos Personales</h3>
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="container2"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js_page %} 
+{% for info in dict_total %}
+<script type="application/javascript">    
+    Highcharts.chart('container2', {
+
+        chart: {
+            polar: true,
+            type: 'line'
+        },
+    
+        accessibility: {
+            description: 'Resultados test CARE en un gráfico de tipo telaraña'
+        },
+    
+        title: {
+            text: 'Trabajo en Equipo'
+        },
+    
+        pane: {
+            size: '80%'
+        },
+    
+        xAxis: {
+            categories: [
+                'Espontaneo', 'Normativo', 'Metódico', 'Conceptual'
+            ],
+            tickmarkPlacement: 'on',
+            lineWidth: 0
+        },
+    
+        yAxis: {
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0
+        },
+    
+        tooltip: {
+            shared: true,
+            pointFormat: '<span style="color:{series.color}">{series.name}: <b>' +
+                '{point.y:,.0f}</b><br/>'
+        },
+    
+        legend: {
+            enable: false
+        },
+    
+        series: [{
+            name: 'Puntaje',
+            data: {{care_list|safe}},
+            pointPlacement: 'on'
+        }],
+    
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        align: 'center',
+                        verticalAlign: 'bottom',
+                        layout: 'horizontal'
+                    },
+                    pane: {
+                        size: '70%'
+                    }
+                }
+            }]
+        }
+    
+    });
+   
+</script>
+{% endfor %}
+{% endblock %}

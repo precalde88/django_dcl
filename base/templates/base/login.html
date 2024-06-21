@@ -1,0 +1,89 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Inicio sesion{% endblock %}
+{% block navigation %}{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}{% endblock %}
+
+{% block login %}
+<!-- [ auth-signin ] start -->
+<div class="auth-wrapper">
+	<div class="auth-content container">
+		<div class="card">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<div class="card-body">
+						<img src="{% static 'base/images/logo-dark.png' %}" alt="" class="img-fluid mb-4">
+						<h4 class="mb-3 f-w-400">Iniciar sesión</h4>
+						<form action="" method="post" novalidate>
+                            {% csrf_token %}
+                            {% for fm in form %}
+                                {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+                                <br>
+                            {% endfor %}
+                            <input type="checkbox" id="box" onclick ="reveal()">  
+                            <small>Mostrar contraseña</small>
+                            <br>
+                            <!-- <small><a href="" class="text-danger">Olvidó contraseña?</a></small> <br> -->
+                            <input type="submit" value="Login" class="btn btn-primary mt-4"> <br>
+                            
+                            <!-- <div class="tex-center text-primary fw-bold">
+                                <small>No tiene cuenta? <a href="" class="text-danger">Registrese</a></small>
+                            </div> -->
+                            {% if form.non_field_errors %}
+                            {% for error in form.non_field_errors  %}
+                                <p class="alert alert-danger my-3">{{error}}</p>
+                            {% endfor %}
+                            {% endif %}
+        
+                            {% if messages %}
+                            {% for msg in messages %}
+                                <div class="alert alert-{{msg.tags}}" role="alert">
+                                    {{msg}}
+                                </div>
+                            {% endfor %}
+                            {% endif %}
+						</form>
+					</div>
+				</div>
+				<div class="col-md-6 d-none d-md-block">
+					<img src="../static/images/auth-bg.jpg" alt="" class="img-fluid">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- [ auth-signin ] end -->
+{% endblock %}
+{% block js_page %} 
+<script type="text/javascript">
+    function reveal()
+    {
+    if(document.getElementById('box').checked)
+       {document.getElementById("id_password").type='text';}
+    else
+    document.getElementById("id_password").type='password';
+    }
+</script> 
+{% endblock %}
+<!-- Required Js -->
+<!--<script src="../assets/js/vendor-all.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<div class="footer-fab">
+    <div class="b-bg">
+        <i class="fas fa-question"></i>
+    </div>
+    <div class="fab-hover">
+        <ul class="list-unstyled">
+            <li><a href="../doc/index-bc-package.html" target="_blank" data-text="UI Kit" class="btn btn-icon btn-rounded btn-info m-0"><i class="feather icon-layers"></i></a></li>
+            <li><a href="../doc/index.html" target="_blank" data-text="Document" class="btn btn-icon btn-rounded btn-primary m-0"><i class="feather icon feather icon-book"></i></a></li>
+        </ul>
+    </div>
+</div>
+
+
+</body>
+
+</html>-->
