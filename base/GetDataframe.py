@@ -425,11 +425,11 @@ def percentil_dicen(valores, baremo, columna_comparar, columna_recuperar):
     resultado = []
     for j in range(len(valores)):
         if baremo == 'A':
-            df2 = pd.read_pickle('../baremos/disc_a.pkl')
+            df2 = pd.read_pickle('./baremos/disc_a.pkl')
         elif baremo == 'B':
-            df2 = pd.read_pickle('../baremos/disc_b.pkl')
+            df2 = pd.read_pickle('./baremos/disc_b.pkl')
         else:
-            df2 = pd.read_pickle('../baremos/disc_c.pkl')
+            df2 = pd.read_pickle('./baremos/disc_c.pkl')
 
         df2 = df2.loc[:, [columna_recuperar, columna_comparar]]
         df2 = df2.dropna()
@@ -449,7 +449,7 @@ def percentil_dicen(valores, baremo, columna_comparar, columna_recuperar):
 def result_dicen(valores, baremo, columna_comparar, columna_recuperar):
     resultado = []
     for j in range(len(valores)):
-        df2 = pd.read_pickle(f'../baremos/{baremo}.pkl')
+        df2 = pd.read_pickle(f'./baremos/{baremo}.pkl')
         try:
             df2 = df2.loc[df2[columna_comparar] == int(valores[j]), [columna_recuperar]]
         except ValueError:
@@ -464,7 +464,7 @@ def result_dicen(valores, baremo, columna_comparar, columna_recuperar):
 
 
 def result_dicen_alternativo(valor, baremo, columna_comparar, columna_recuperar):
-    df2 = pd.read_pickle(f'../baremos/{baremo}.pkl')
+    df2 = pd.read_pickle(f'./baremos/{baremo}.pkl')
     try:
         df2 = df2.loc[df2[columna_comparar] == int(valor), [columna_recuperar]]
     except ValueError:
