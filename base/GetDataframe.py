@@ -161,6 +161,7 @@ def grafico_bar_alt(labels, values, title=""):
     buffer.close()
     graphic = base64.b64encode(image_png)
     graphic = graphic.decode('utf-8')
+    plt.close()
     return graphic
 
 
@@ -194,6 +195,7 @@ def grafico_bar(labels, values, title=""):
     buffer.seek(0)
     image_png = buffer.getvalue()
     buffer.close()
+    plt.close()
     return image_png
 
 def get_grafico_polar_liderazgo_word(id):
@@ -265,6 +267,7 @@ def grafico_polar_alt(label, values, titulo=" "):
     buffer.seek(0)
     image_png = buffer.getvalue()
     buffer.close()
+    plt.close()
     return image_png
 
 
@@ -314,7 +317,7 @@ def grafico_polar(label, values, titulo=" "):
 
     graphic = base64.b64encode(image_png)
     graphic = graphic.decode('utf-8')
-    
+    plt.close()
     return graphic
     """ N = 4
     theta = radar_factory(N, frame='polygon')
