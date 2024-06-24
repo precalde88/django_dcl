@@ -138,5 +138,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'plantillas')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/disc'
 LOGOUT_REDIRECT_URL = '/login/'
