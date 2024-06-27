@@ -17,15 +17,13 @@ import tempfile
 
 # Create your views here.
 class Home(LoginRequiredMixin, generic.TemplateView):
-    template_name = 'base/inicio.html'
     login_url='base:login'
-
-class DiscTotal(LoginRequiredMixin, generic.TemplateView):
     def get(self, request):
         total = GetDataframe.df_info_inicial()
         columns = total.columns.values
         dict_total = total.to_dict('records')
         return render(request, 'base/disctotal.html', locals())
+
     
 class ResultadoDisc(LoginRequiredMixin, generic.TemplateView):
     def get(self, request, val):
