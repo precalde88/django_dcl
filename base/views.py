@@ -13,7 +13,10 @@ from docx.shared import Mm
 from django.conf import settings
 import os
 import tempfile
+import datetime
+import zoneinfo
 
+zona_asuncion = zoneinfo.ZoneInfo("America/Asuncion")
 
 # Create your views here.
 class Home(LoginRequiredMixin, generic.TemplateView):
@@ -57,6 +60,8 @@ class ViewGraficoCare(generic.TemplateView):
 class DescargarWord(generic.TemplateView):
     def get(self, request, val):
         val_int = int(val)
+        hora_asuncion = datetime.datetime.now(zona_asuncion)
+        hora_asuncion = hora_asuncion.strftime('%d/%m/%Y')
         info_test = GetDataframe.info_test_total(val_int)
         name = info_test['Nombre y apellido'].values.tolist()
         #Dict info total DCL
@@ -87,7 +92,7 @@ class DescargarWord(generic.TemplateView):
             temp_file3.write(graf_disc)
             img_temp = str(temp_file3.name)
             imagen3 = InlineImage(doc, img_temp, width=Mm(60))
-        context = {'imagen': imagen, 'dict_total_fin': dict_total_fin, 'imagen2': imagen2, 'imagen3': imagen3}
+        context = {'imagen': imagen, 'dict_total_fin': dict_total_fin, 'imagen2': imagen2, 'imagen3': imagen3, 'hora': hora_asuncion}
         doc.render(context)
         doc.save(response)
         return response
