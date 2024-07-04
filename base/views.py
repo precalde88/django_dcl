@@ -67,7 +67,7 @@ class DescargarWord(generic.TemplateView):
         response = HttpResponse(content_type='application/msword')
         response['Content-Disposition'] = f'attachment; filename="{name[0]}.docx"'
         
-        path_plantilla = os.path.join(settings.BASE_DIR,'base', 'plantilla', 'Matriz_informe.docx') 
+        path_plantilla = os.path.join(settings.BASE_DIR,'base', 'plantilla', 'Plantilla_informe.docx') 
         doc = DocxTemplate(path_plantilla)
         graf_care = GetDataframe.get_grafico_polar_care_word(val_int)
         graf_lider = GetDataframe.get_grafico_polar_liderazgo_word(val_int)
