@@ -92,7 +92,8 @@ class DescargarWord(generic.TemplateView):
             temp_file3.write(graf_disc)
             img_temp = str(temp_file3.name)
             imagen3 = InlineImage(doc, img_temp, width=Mm(60))
-        context = {'imagen': imagen, 'dict_total_fin': dict_total_fin, 'imagen2': imagen2, 'imagen3': imagen3, 'hora': hora_asuncion}
+        nombre = f"{request.user.first_name} {request.user.last_name}"
+        context = {'imagen': imagen, 'dict_total_fin': dict_total_fin, 'imagen2': imagen2, 'imagen3': imagen3, 'hora': hora_asuncion, 'user': nombre}
         doc.render(context)
         doc.save(response)
         return response
